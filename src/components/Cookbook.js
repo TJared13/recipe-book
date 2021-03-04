@@ -10,10 +10,22 @@ class Cookbook extends Component {
             recipes,
             index: 0
         }
-    }
-    // Create two methods... one called increase, and one called decrease. In the increase method, check the value of index to see if it is less than recipes.length - 1. If so, use setState to increment index by 1.
 
+        this.increase = this.increase.bind(this);
+        this.decrease = this.decrease.bind(this);
+    };
+    // Create two methods... one called increase, and one called decrease. In the increase method, check the value of index to see if it is less than recipes.length - 1. If so, use setState to increment index by 1.
+    increase(){
+        if (this.state.index < this.state.recipes.length -1){
+            this.setState({index: this.state.index + 1})
+        }
+    };
     // In the decrease method, check to see if the value of index is greater than 0. If so, use setState to decrement index by 1.
+    decrease (){
+        if (this.state.index > 0){
+            this.setState({index: this.state.index -1})
+        }
+    };
 
     // Bind these methods, giving them the context of this.
 
@@ -24,12 +36,12 @@ class Cookbook extends Component {
 
         return (
             <div className="container">
-                <RecipeCard/>
-                <Nav/>
+                <RecipeCard index={this.state.index} recipes={this.state.recipes} />
+                <Nav increase={this.increase} decrease={this.decrease} />
             </div>
         )
     }
 
-}
+};
 
 export default Cookbook
